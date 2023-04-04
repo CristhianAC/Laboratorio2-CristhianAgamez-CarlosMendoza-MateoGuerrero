@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crimaca</title>
+    
+    <link rel="stylesheet" type="text/css" href="{% static '/Css/estilo.css' %}">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;600&display=swap" rel="stylesheet">
+    
+
+
+</head>
+
+<body>
+    <header>
+        <h1>CRIMACA <span>Tu web de vuelo favorita</span></h1>
+    </header>
+    
+</body>
+<div class="navbg">
+    <nav class="navegacionPrincipal">
+        <a href="#">Sobre nosotros</a>
+        <a href="#">Sistema De Vuelo</a>
+        <a href="#">Contacto</a>
+    </nav>
+</div>
+
+<section class="hero">
+    <div class="contenidoHero">
+        <h2>Encuentra el vuelo mas optimo aquí</h2>
+    </div>
+
+</section>
+<main class="contenedor sombra">
+    <h2>Mis Servicios</h2>
+
+    <div class="servicios">
+        <section class="servicio">
+            <h3>Busqueda de vuelos en tiempo real.</h3>
+            
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo id, doloribus rerum distinctio
+                dicta
+                fugiat suscipit reprehenderit repudiandae nesciunt.</p>
+        </section>
+
+        <section class="servicio">
+            <h3>Encuentra tu ruta mas optima.</h3>
+            
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo id, doloribus rerum distinctio dicta
+                fugiat suscipit reprehenderit repudiandae nesciunt.</p>
+        </section>
+
+        <section class="servicio">
+            <h3>Viaja por el mundo.</h3>
+            
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo id, doloribus rerum distinctio dicta
+                fugiat suscipit reprehenderit repudiandae nesciunt.</p>
+        </section>
+
+    </div>
+
+    <section>
+        <h2>Contacto</h2>
+        <form class="formulario">
+            <fieldset>
+                <legend>Contactame llenando todos los campos</legend>
+                <div class="campos">
+                    <div class="campo">
+                        <label>Nombre</label>
+                        <input type="text" class="input-text" placeholder="Nombre">
+                    </div>
+
+                    <div class="campo">
+                        <label>Telefono</label>
+                        <input type="tel" class="input-text" placeholder="Telefono">
+                    </div>
+
+                    <div class="campo">
+                        <label>Correo</label>
+                        <input type="email" class="input-text" placeholder="email">
+                    </div>
+
+                    <div class="campo">
+                        <label>Mensaje</label>
+                        <textarea class="input-text"></textarea>
+                    </div>
+
+                    <div class="campo enviar">
+                        <input type="submit" class="button" value="Enviar">
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </section>
+</main>
+<footer class="footer">
+    <p>Todos los derechos reservados, Cristhian Agamez, Mateo Guerrero y Carlos Mendoza</p>
+</footer>
+</html>
