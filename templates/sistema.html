@@ -1,6 +1,13 @@
 {% extends 'partials/base.html' %}
-    {% block content %}
-    
-        {{m | safe}}
-    
-    {% endblock %}
+{% block content %}
+
+{{m | safe}}
+<form method="post">
+    {% csrf_token %}
+    {{addCity.as_p}}
+    <button onclick="document.location.reload()" style="background-color: black; height: 30px; padding-left: 20px;justify-content: center;">
+        
+        Accept
+    </button>
+</form>
+{% endblock %}

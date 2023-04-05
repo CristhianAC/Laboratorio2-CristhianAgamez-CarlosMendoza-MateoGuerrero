@@ -19,7 +19,9 @@ html{
 *, *:before, *:after {
     box-sizing: inherit;
 }
-
+input{
+    color: black;
+}
 
 h1,h2,h3{
     
@@ -169,7 +171,14 @@ footer p{
     flex-direction: column;
     align-items: center;
 }
-
+button{
+    background-color: #5c0101;
+}
+.mapa{
+    display: grid;
+    grid-template-columns: 2/3, 1/3;
+    column-gap: 20px;
+}
 .mapa div{
     
     
