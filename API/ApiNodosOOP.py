@@ -5,16 +5,20 @@ import time
 from geopy import distance
 
 class AirportMap:
-    def __init__(self, icao):
-        self.icao = icao
+    def __init__(self):
+        self.icao = None
         self.api = OpenSkyApi()
         self.now = int(time.time())
         with open("API/Capitales.json", "r") as f: 
             self.airports_dict = json.load(f)
         self.mapa = folium.Map(location=[4.6097100, -74.0817500], zoom_start=3, tiles="Stamen Terrain")
         self.add_airport_markers()
+        
+        
+    def actualizar(self, icao =  "SKBO"):
+        self.icao = icao
+        print(icao)
         self.add_flight_markers()
-
     def add_airport_markers(self):
         for icao, airport in self.airports_dict.items():
             folium.Marker([airport['lat'], airport['lon']], icon=folium.Icon(color='lightgray')).add_to(self.mapa)
@@ -32,9 +36,8 @@ class AirportMap:
                 folium.PolyLine(locations=[salida, llegada], color='blue', tooltip=etiqueta).add_to(self.mapa)
 
     def show_map(self):
-        self.mapa.save('MapaVuelos.html')
+        #self.mapa.save('MapaVuelos.html')
         return self.mapa
 
 
-airport_map = AirportMap("LEMD")
-airport_map.show_map()
+
