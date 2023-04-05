@@ -66,7 +66,7 @@ TEMPLATES = [
         },
     },
 ]
-
+TIMEOUT = 1000
 WSGI_APPLICATION = 'mainP.wsgi.application'
 
 

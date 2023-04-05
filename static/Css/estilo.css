@@ -8,7 +8,7 @@
 html{
     font-size: 62.5%;
     box-sizing: border-box;
-    scroll-snap-type: y mandatory;
+    
     background-color: black;
 }
 *{
@@ -25,7 +25,7 @@ h1,h2,h3{
     
     text-align: center;
     color: white;
-    
+    font-weight: bold;
 }
 h3{
     font-size: 1.8rem;
@@ -36,6 +36,7 @@ h3{
 }
 .navbg{
     background-color: var(--primario);
+    border-radius: 1.5rem;
 }
 .formulario{
     background-color: rgb(55, 55, 55);
@@ -56,18 +57,12 @@ h3{
 .formulario fieldset{
     border: none;
 }
-.servicios{
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
-}
+
 .ubicacion{
     display: flex;
     align-items: flex-end;
 }
-.campos{
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
-}
+
 .campo{
     margin-bottom: 1rem;
 }
@@ -108,6 +103,7 @@ h1 {
     margin-bottom: 2rem;
     position: relative;
 }
+
 .contenidoHero{
     position: absolute;
     width: 100%;
@@ -117,8 +113,7 @@ h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
+    
 }
 span{
     font-size: 2rem;
@@ -129,11 +124,18 @@ h2{
     font-size: 3rem;
     font-weight: lighter;
 }
+.logo{
+    width: 17rem;
+    padding: 1rem;
+    padding-left: 2rem;
+}
 .navegacionPrincipal a {
     color: white;
     text-decoration: none;
-    padding: 1.2rem;
+    padding-right: 17rem;
     text-indent: 0%;
+    font-size: 2.5rem;
+    align-self: center;
 }
 .navegacionPrincipal a:hover {
     background-color: var(--primario);
@@ -167,10 +169,13 @@ footer p{
     flex-direction: column;
     align-items: center;
 }
-.mapa{
-    width: 10rem;
+
+.mapa div{
+    
+    
+    padding: 2rem 25rem 5rem 25rem;
     display: flex;
-    flex-direction: column;
+    
 }
 @media (min-width:768px) {
     .navegacionPrincipal{

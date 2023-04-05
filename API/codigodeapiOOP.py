@@ -4,7 +4,7 @@ import json
 import time
 
 class FlightMap:
-    def __init__(self, airport_code):
+    def __init__(self, airport_code = "LEMD"):
         self.airport_code = airport_code
         self.api = OpenSkyApi()
         self.airports = {}
@@ -12,7 +12,7 @@ class FlightMap:
         self.map = None
         
     def _get_airports(self):
-        with open("aeropuertos.json", "r") as f:
+        with open("API/aeropuertos.json", "r") as f:
             self.airports = json.load(f)
     
     def _get_flights(self):
@@ -28,13 +28,13 @@ class FlightMap:
                 folium.Marker(location=llegada, popup=flight.estArrivalAirport + " (llegada)", icon=folium.Icon(color='red')).add_to(self.map)      
                 folium.PolyLine(locations=[salida, llegada], color='blue').add_to(self.map)         
         self.map.save('mapa.html')  
-                 
+
     def create_map(self):
         
         self._get_airports()
         self._get_flights()  
         airport_coords = (self.airports[self.airport_code]["lat"], self.airports[self.airport_code]["lon"])
-        self.map = folium.Map(location=airport_coords, zoom_start=3)
+        self.map = folium.Map(location=airport_coords,min_zoom=3, max_zoom=3)
         self._create_markers()       
         return self.map
 
