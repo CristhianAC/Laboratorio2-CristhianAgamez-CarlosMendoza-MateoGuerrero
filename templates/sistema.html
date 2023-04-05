@@ -4,10 +4,10 @@
 {{m | safe}}
 <form method="post">
     {% csrf_token %}
-    {{addCity}}
+    {{addCity.as_p}}
     <button onclick="document.location.reload()" style="background-color: black; height: 30px; padding-left: 20px;justify-content: center;">
         
-        reset
+        Accept
     </button>
 </form>
 {% endblock %}
