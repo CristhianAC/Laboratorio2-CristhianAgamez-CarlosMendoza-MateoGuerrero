@@ -1,12 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import folium
-# Create your views here.
+from API.codigodeapiOOP import FlightMap
+# Create 
+# your views here.
 
 def index(request):
     return render(request, 'index.html', {})
 def mapa(request):
-    m = folium.Map()
+    flight = FlightMap()
+    m = flight.create_map()
     m = m._repr_html_()
     context = {
         'm' : m,
