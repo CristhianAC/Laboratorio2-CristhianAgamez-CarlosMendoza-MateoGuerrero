@@ -7,7 +7,7 @@ from geopy import distance
 api = OpenSkyApi()
 now = int(time.time())
 
-with open("yatusabe.json", "r") as f: 
+with open("API/yatusabe.json", "r") as f: 
     airports_dict = json.load(f)
 
 mapa = folium.Map(location=[4.6097100, -74.0817500], min_zoom=3, zoom_start=3, tiles="Stamen Terrain")

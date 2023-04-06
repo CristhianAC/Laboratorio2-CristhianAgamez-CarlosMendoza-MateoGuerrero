@@ -11,7 +11,7 @@ class AirportMap:
         self.now = int(time.time())
         with open("API/Capitales.json", "r") as f: 
             self.airports_dict = json.load(f)
-        self.mapa = folium.Map(location=[4.6097100, -74.0817500], zoom_start=3, tiles="Stamen Terrain")
+        self.mapa = folium.Map(location=[4.6097100, -74.0817500], min_zoom=3, zoom_start=3, tiles="Stamen Terrain")
         self.add_airport_markers()
         
         
@@ -36,7 +36,7 @@ class AirportMap:
                 folium.PolyLine(locations=[salida, llegada], color='blue', tooltip=etiqueta).add_to(self.mapa)
 
     def show_map(self):
-        #self.mapa.save('MapaVuelos.html')
+        
         return self.mapa
 
 

@@ -22,7 +22,9 @@ html{
 input{
     color: black;
 }
-
+p{
+    font-size: 1.3rem;
+}
 h1,h2,h3{
     
     text-align: center;
@@ -134,7 +136,7 @@ h2{
 .navegacionPrincipal a {
     color: white;
     text-decoration: none;
-    padding-right: 17rem;
+    padding-right: 20rem;
     text-indent: 0%;
     font-size: 2.5rem;
     align-self: center;
