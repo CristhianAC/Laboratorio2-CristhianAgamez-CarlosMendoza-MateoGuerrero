@@ -1539,10 +1539,10 @@
         "lat": 51.4706001282,
         "lon": -0.4619410038
     },
-    "Dulles": {
+    "Washington": {
         "icao": "KIAD",
         "name": "Washington Dulles International Airport",
-        "city": "Dulles",
+        "city": "Washington",
         "lat": 38.94449997,
         "lon": -77.45580292
     },
