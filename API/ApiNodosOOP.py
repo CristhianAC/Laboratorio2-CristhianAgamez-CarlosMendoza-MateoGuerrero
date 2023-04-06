@@ -4,24 +4,29 @@ import time
 from geopy import distance
 from opensky_api import OpenSkyApi
 
-class FlightMap:
-    def __init__(self, origen):
-        self.origen = origen
+class AirportMap:
+    def __init__(self):
+        self.origen = None
         self.api = OpenSkyApi()
         self.now = int(time.time())
-        with open("city_dataSIU.json", "r") as f:
+        with open("API/city_dataSIU.json", "r") as f:
             self.airports_dict = json.load(f)
         self.mapa = folium.Map(location=[4.6097100, -74.0817500], min_zoom=3, zoom_start=3, tiles="Stamen Terrain")
+        self.icoa_origen = None
+        self.etiqueta_origen = None
+        
+    
+    def mostrar_todos_destinos(self, origen):
+        self.origen = origen
         if self.origen in self.airports_dict:
             self.icoa_origen = self.airports_dict[self.origen]['icao']
             self.etiqueta_origen = self.airports_dict[self.origen]["city"]
         else:
             print("La ciudad ingresada no está en la lista de aeropuertos.")
-            exit()
+            
         for icao, airport in self.airports_dict.items():
             folium.Marker([airport['lat'], airport['lon']], popup= airport["city"], icon=folium.Icon(color='lightgray')).add_to(self.mapa)
-    
-    def mostrar_todos_destinos(self):
+        
         flights = self.api.get_departures_by_airport(self.icoa_origen, begin=self.now-2*(24*3600), end=self.now)
         for flight in flights: 
             if flight.estArrivalAirport is not None:
@@ -96,14 +101,9 @@ class FlightMap:
             icoa_salida = icao_destino
     """   
     def mostrar_mapa(self):
-        self.mapa.save("flight_map.html")
-        print("El mapa se ha generado correctamente en el archivo 'flight_map.html'.")
+        return self.mapa
     
 
 
-origen = input("Origen: ")
-#destino = input("Destino: ")
-mapa_vuelos = FlightMap(origen)
-mapa_vuelos.mostrar_destinos_consecutivos()
-mapa_vuelos.mostrar_mapa()
+
 

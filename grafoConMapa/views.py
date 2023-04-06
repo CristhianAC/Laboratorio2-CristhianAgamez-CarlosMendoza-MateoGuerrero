@@ -13,7 +13,7 @@ def index(request):
 
 def mapa(request):
     flight = AirportMap()
-    m = flight.show_map()
+    m = flight.mostrar_mapa()
 
     if request.method == "GET":
         m = m._repr_html_()
@@ -25,7 +25,7 @@ def mapa(request):
         }
         return render(request, 'sistema.html', context)
     else:
-        flight.actualizar(request.POST["City"])
+        flight.mostrar_todos_destinos(request.POST["City"])
 
         m = m._repr_html_()
 
