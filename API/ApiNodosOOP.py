@@ -19,7 +19,7 @@ class AirportMap:
         self.etiqueta_origen = None
         self.Grafo = {}
         self.horaActual = datetime.datetime.now()
-        
+        self.error = ""
         if self.horaActual.hour == 0 and self.horaActual.minute == 0:
             with open("API/grafo.json", "w") as h:
                 self.crearGrafo()
@@ -30,6 +30,8 @@ class AirportMap:
     
     def crearPath(self, origen, fin):
         path = self.obGrafo.shortest_path(origen, fin)
+        if path is not None:
+            self.error = ""
         return path
     def crearGrafo(self):
         
@@ -61,7 +63,8 @@ class AirportMap:
             self.icoa_origen = self.airports_dict[self.origen]['icao']
             self.etiqueta_origen = self.airports_dict[self.origen]["city"]
         else:
-            print("La ciudad ingresada no está en la lista de aeropuertos.")
+            print("Entré")
+            self.error = "La ciudad ingresada no está en la lista de aeropuertos."
             
         for icao, airport in self.airports_dict.items():
             folium.Marker([airport['lat'], airport['lon']], popup= airport["city"], icon=folium.Icon(color='lightgray')).add_to(self.mapa)
@@ -87,7 +90,7 @@ class AirportMap:
             icao_destino = self.airports_dict[destino]['icao']
             etiqueta_destino = self.airports_dict[destino]["city"]
         else:
-            print("La ciudad ingresada no está en la lista de aeropuertos.")
+            self.error =("La ciudad ingresada no está en la lista de aeropuertos.")
             return
         flights = self.api.get_departures_by_airport(icoa_salida, begin=self.now-2*(24*3600), end=self.now)
         for flight in flights:
@@ -105,8 +108,9 @@ class AirportMap:
                         etiqueta = f"{self.origen}-{destino} ({dist_km} km)"
                         folium.PolyLine(locations=[salida, llegada], color='blue', tooltip=etiqueta).add_to(self.mapa)
                         self.mapa.fit_bounds([salida, llegada])
+                        self.error = ""
                         return
-        print(f"No se encontraron vuelos desde {self.origen} a {destino}.")
+        self.error = f"No se encontraron vuelos desde {self.origen} a {destino}."
     
     # Dentro de la clase donde se encuentra la función mostrar_destino()
     def graficar_ciudades(self, lista):

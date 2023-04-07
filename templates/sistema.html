@@ -3,11 +3,20 @@
 
 {{m | safe}}
 <form method="post">
+    <h3>Instrucciones</h3>
+    <ul style="padding-bottom: 30px; ">
+        <li>Si digitas solo la ciudad de origen te mostrará solo los posibles vuelos de este
+            (si es que los tiene).</li>
+        <li>Si digitas los dos, y este tiene un vuelo directo te mostrará el vuelo directo, de lo contrario te mostrará la escala mas optima.</li>
+        <li>Digita las ciudades en ingles y con mayuscula al principio, de lo contrario no funcionará</li>
+    </ul>
     {% csrf_token %}
     {{addCity.as_p}}
     <button onclick="document.location.reload()" style="background-color: black; height: 30px; padding-left: 20px;justify-content: center;">
         
         Accept
     </button>
+    <p style="color: red; font-size: 15px;">Errores: </p>
+    {{error}}
 </form>
 {% endblock %}
