@@ -2,7 +2,7 @@
     "UGSS": {
         "icao": "UGSS",
         "name": "Sukhumi Dranda Airport",
-        "city": "Sukhumi",
+        "city": "Sukhumi",  
         "lat": 42.8582000732,
         "lon": 41.1281013489
     },

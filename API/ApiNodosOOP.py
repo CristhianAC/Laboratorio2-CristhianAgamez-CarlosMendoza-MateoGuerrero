@@ -20,13 +20,15 @@ class AirportMap:
         self.Grafo = {}
         self.horaActual = datetime.datetime.now()
         self.error = ""
+        for icao, airport in self.airports_dict.items():
+            folium.Marker([airport['lat'], airport['lon']], popup= airport["city"], icon=folium.Icon(color='lightgray')).add_to(self.mapa)
+        
         if self.horaActual.hour == 0 and self.horaActual.minute == 0:
             with open("API/grafo.json", "w") as h:
                 self.crearGrafo()
                 json.dump(self.Grafo, h)
-        for icao, airport in self.airports_dict.items():
-            folium.Marker([airport['lat'], airport['lon']], popup= airport["city"], icon=folium.Icon(color='lightgray')).add_to(self.mapa)        
                 
+        
         self.obGrafo = Grafo()
     
     def crearPath(self, origen, fin):
@@ -67,7 +69,8 @@ class AirportMap:
             print("Entré")
             self.error = "La ciudad ingresada no está en la lista de aeropuertos."
         grupo = folium.FeatureGroup(name="Destinos")
-        
+        for icao, airport in self.airports_dict.items():
+            folium.Marker([airport['lat'], airport['lon']], popup= airport["city"], icon=folium.Icon(color='lightgray')).add_to(self.mapa)
         
         flights = self.api.get_departures_by_airport(self.icoa_origen, begin=self.now-2*(24*3600), end=self.now)
         for flight in flights: 
@@ -116,6 +119,9 @@ class AirportMap:
     
     # Dentro de la clase donde se encuentra la función mostrar_destino()
     def graficar_ciudades(self, lista):
+        for icao, airport in self.airports_dict.items():
+            folium.Marker([airport['lat'], airport['lon']], popup= airport["city"], icon=folium.Icon(color='lightgray')).add_to(self.mapa)
+        
         for i, ciudad in enumerate(lista[:-1]):
             salida = lista[i]
             llegada = lista[i + 1]
@@ -126,12 +132,13 @@ class AirportMap:
                 color_salida = "green"
             else:
                 color_salida = "darkblue"
-
-            html = f"Capital: {salida}<br> Ruta: {salida}→{llegada} (llegada)<br>Distancia: {distancia} km"
+            nombreSalida = self.icao_dict[salida]['city']
+            nombreLlegada = self.icao_dict[llegada]['city']
+            html = f"Capital: {nombreSalida}<br> Ruta: {nombreSalida}→{nombreLlegada}<br>Distancia: {distancia} km"
             iframe = folium.IFrame(html, width=200, height=70)
             popup = folium.Popup(iframe, max_width=200)
             marker = folium.Marker(location=coord_salida, popup=popup, icon=folium.Icon(color=color_salida)).add_to(self.mapa)
-            folium.Marker(location=coord_llegada, popup=llegada + " (llegada)", icon=folium.Icon(color='darkpurple')).add_to(self.mapa)
+            folium.Marker(location=coord_llegada, popup=nombreLlegada, icon=folium.Icon(color='darkpurple')).add_to(self.mapa)
             etiqueta = f"{salida} → {llegada}({distancia})"
             folium.PolyLine(locations=[coord_salida, coord_llegada], color='blue', tooltip=etiqueta).add_to(self.mapa)
         return self.mapa
