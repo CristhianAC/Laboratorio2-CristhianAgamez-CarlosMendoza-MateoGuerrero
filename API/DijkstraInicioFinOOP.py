@@ -10,7 +10,10 @@ class Grafo:
     
     # Un método para obtener los vecinos de un nodo
     def get_vecinos(self, nodo):
-        return list(self.diccionario[nodo].keys())
+        if nodo is not None:
+            return list(self.diccionario[nodo].keys())
+        else:
+            return None
     
     # Un método para obtener el peso de una arista
     def get_peso(self, origen, destino):
@@ -26,12 +29,13 @@ class Grafo:
         while len(visitado) < len(self.get_nodos()):     
             u = self.min_distancia(distancia, visitado)    
             visitado.add(u)     
-            for v in self.get_vecinos(u):       
-                if v not in visitado:         
-                    d = distancia[u] + self.get_peso(u, v)      
-                    if d < distancia.get(v, float("inf")):        
-                        distancia[v] = d                
-                        previo[v] = u
+            if (self.get_vecinos(u) is not None):
+                for v in self.get_vecinos(u):       
+                    if v not in visitado:         
+                        d = distancia[u] + self.get_peso(u, v)      
+                        if d < distancia.get(v, float("inf")):        
+                            distancia[v] = d                
+                            previo[v] = u
         return distancia, previo
     
     # Un método auxiliar para encontrar el nodo con la menor distancia que no ha sido visitado
@@ -61,6 +65,7 @@ class Grafo:
         return path
 
 # Crear un objeto Grafo con el diccionario dado
+"""
 grafo = Grafo({
     "a": {"b": 1, "c": 3},
     "b": {"a": 1, "c": 1, "d": 4},
@@ -70,10 +75,13 @@ grafo = Grafo({
     "f": {"d": 1, "e": 3, "g": 4},
     "g": {"e": 2, "f": 4}
 })
+"""
 
 # Ejemplo: encontrar el camino más corto desde a hasta g
+"""
 path = grafo.shortest_path("a", "g")
 if path:
     print("El camino más corto desde a hasta g es:", "->".join(path))
 else:
     print("No hay camino desde a hasta g")
+"""
