@@ -4,6 +4,7 @@ import time
 from geopy import distance
 from opensky_api import OpenSkyApi
 from .DijkstraInicioFinOOP import Grafo
+import datetime
 class AirportMap:
     def __init__(self):
         self.origen = None
@@ -17,10 +18,17 @@ class AirportMap:
         self.icoa_origen = None
         self.etiqueta_origen = None
         self.Grafo = {}
-        self.grafo = self.crearGrafo()
-        print(self.grafo.diccionario)
+        horaActual = datetime.datetime.now()
+        if horaActual.hour == 0 and horaActual.minute == 0:
+            with open("API/grafo.json", "w") as h:
+                self.crearGrafo()
+                json.dump(self.Grafo, h)
+                
+                
+        self.obGrafo = Grafo()
+    
     def crearPath(self, origen, fin):
-        path = self.grafo.shortest_path(origen, fin)
+        path = self.obGrafo.shortest_path(origen, fin)
         return path
     def crearGrafo(self):
         
@@ -38,8 +46,8 @@ class AirportMap:
                         
                         llegada = (arrival["lat"], arrival["lon"])
                         self.Grafo[airport["icao"]][flight.estArrivalAirport] = round(distance.distance(salida, llegada).km, 2)
-        g = Grafo(self.Grafo)
-        return g
+        
+        
         
 
     

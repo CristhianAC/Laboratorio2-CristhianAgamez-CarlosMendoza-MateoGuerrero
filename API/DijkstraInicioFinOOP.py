@@ -1,9 +1,12 @@
+import json
 # Definir una clase Grafo que representa un grafo ponderado
 class Grafo:
     # El constructor recibe un diccionario que representa las aristas y sus pesos
-    def __init__(self, diccionario):
-        self.diccionario = diccionario
-    
+    def __init__(self):
+        with open("API/grafo.json", "r") as f:
+            self.diccionario = json.load(f)
+        
+        
     # Un método para obtener los nodos del grafo
     def get_nodos(self):
         return list(self.diccionario.keys())
@@ -51,9 +54,13 @@ class Grafo:
     # Un método para encontrar el camino más corto entre dos nodos usando Dijkstra
     def shortest_path(self, origen, destino):
         # Ejecutar Dijkstra desde el origen
-        origenFin = self.diccionario.get(origen).get(destino)
-        if origenFin is not None:
-            return [origen, destino]
+        origeni = self.diccionario.get(origen)
+        
+        if origeni is not None:
+            destinoi = self.diccionario.get(origen).get(destino)
+            print(destinoi)
+            if destinoi is not None:
+                return [origen, destino]
         distancia, previo = self.dijkstra(origen)
         # Verificar si el destino es alcanzable
         if destino not in distancia:
