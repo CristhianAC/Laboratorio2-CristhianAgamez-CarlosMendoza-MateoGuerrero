@@ -7,6 +7,7 @@ grafo = {
     "f": {"d": 1, "e": 3, "g": 4},
     "g": {"e": 2, "f": 4}
 }
+
 def min_distancia(distancia, visitado): 
     minimo = float("inf")
     nodo_minimo = None 
@@ -32,12 +33,25 @@ def dijkstra(grafo, origen):
                     distancia[v] = d                
                     previo[v] = u
     return distancia, previo
-distancia, previo = dijkstra(grafo, "a")
 
-print("Distancia desde a a cada nodo:")
-for nodo in distancia:
-    print(nodo, ":", distancia[nodo])
+def shortest_path(grafo, origen, destino):
+    # Run dijkstra from the origin node
+    distancia, previo = dijkstra(grafo, origen)
+    # Check if the destination node is reachable
+    if destino not in distancia:
+        return None
+    # Trace back the path from the destination to the origin
+    path = [destino]
+    while previo[destino] != None:
+        destino = previo[destino]
+        path.append(destino)
+    # Reverse the path to get the correct order
+    path.reverse()
+    return path
 
-print("Nodo previo a cada nodo:")
-for nodo in previo:
-    print(nodo, ":", previo[nodo])
+# Example: find the shortest path from a to g
+path = shortest_path(grafo, "a", "g")
+if path:
+    print("The shortest path from a to g is:", "->".join(path))
+else:
+    print("There is no path from a to g")
