@@ -16,7 +16,7 @@ class Grafo:
         if nodo is not None:
             return list(self.diccionario[nodo].keys())
         else:
-            return None
+            return []
     
     # Un método para obtener el peso de una arista
     def get_peso(self, origen, destino):
@@ -32,8 +32,10 @@ class Grafo:
         while len(visitado) < len(self.get_nodos()):     
             u = self.min_distancia(distancia, visitado)    
             visitado.add(u)     
-            if (self.get_vecinos(u) is not None):
-                for v in self.get_vecinos(u):       
+            print(self.get_vecinos(u))
+            if (self.get_vecinos(u)):
+                for v in self.get_vecinos(u):    
+                    print("Segunda parte")   
                     if v not in visitado:         
                         d = distancia[u] + self.get_peso(u, v)      
                         if d < distancia.get(v, float("inf")):        
@@ -58,7 +60,7 @@ class Grafo:
         
         if origeni is not None:
             destinoi = self.diccionario.get(origen).get(destino)
-            print(destinoi)
+            
             if destinoi is not None:
                 return [origen, destino]
         distancia, previo = self.dijkstra(origen)

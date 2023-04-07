@@ -29,7 +29,7 @@ def mapa(request):
         return render(request, 'sistema.html', context)
     else:
         if request.POST["destiny"]:
-            print(flight.crearPath(flight.airports_dict[request.POST["City"]]["icao"] ,flight.airports_dict[request.POST["destiny"]]["icao"] ))
+            
             flight.graficar_ciudades(flight.crearPath(flight.airports_dict[request.POST["City"]]["icao"] ,flight.airports_dict[request.POST["destiny"]]["icao"] )) 
             
         else:

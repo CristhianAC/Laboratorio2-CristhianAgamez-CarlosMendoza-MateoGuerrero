@@ -18,8 +18,9 @@ class AirportMap:
         self.icoa_origen = None
         self.etiqueta_origen = None
         self.Grafo = {}
-        horaActual = datetime.datetime.now()
-        if horaActual.hour == 0 and horaActual.minute == 0:
+        self.horaActual = datetime.datetime.now()
+        
+        if self.horaActual.hour == 0 and self.horaActual.minute == 0:
             with open("API/grafo.json", "w") as h:
                 self.crearGrafo()
                 json.dump(self.Grafo, h)
