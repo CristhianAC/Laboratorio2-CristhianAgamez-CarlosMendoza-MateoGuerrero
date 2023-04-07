@@ -24,7 +24,8 @@ class AirportMap:
             with open("API/grafo.json", "w") as h:
                 self.crearGrafo()
                 json.dump(self.Grafo, h)
-                
+        for icao, airport in self.airports_dict.items():
+            folium.Marker([airport['lat'], airport['lon']], popup= airport["city"], icon=folium.Icon(color='lightgray')).add_to(self.mapa)        
                 
         self.obGrafo = Grafo()
     
@@ -66,8 +67,7 @@ class AirportMap:
             print("Entré")
             self.error = "La ciudad ingresada no está en la lista de aeropuertos."
         grupo = folium.FeatureGroup(name="Destinos")
-        for icao, airport in self.airports_dict.items():
-            folium.Marker([airport['lat'], airport['lon']], popup= airport["city"], icon=folium.Icon(color='lightgray')).add_to(self.mapa)
+        
         
         flights = self.api.get_departures_by_airport(self.icoa_origen, begin=self.now-2*(24*3600), end=self.now)
         for flight in flights: 
