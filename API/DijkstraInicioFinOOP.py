@@ -1,4 +1,5 @@
 import json
+import heapq # Para usar la cola de prioridad
 # Definir una clase Grafo que representa un grafo ponderado
 class Grafo:
     # El constructor recibe un diccionario que representa las aristas y sus pesos
@@ -23,27 +24,52 @@ class Grafo:
         return self.diccionario[origen][destino]
     
     # Un método para aplicar el algoritmo de Dijkstra desde un nodo origen
-    def dijkstra(self, origen):
+    
+
+    def dijkstra(self, origen):   
         distancia = {}  
         previo = {}  
         visitado = set()  
         distancia[origen] = 0
         previo[origen] = None  
-        while len(visitado) < len(self.get_nodos()):     
-            u = self.min_distancia(distancia, visitado)    
+        # Crear una cola de prioridad vacía
+        cola = []
+        # Insertar el origen con distancia 0
+        heapq.heappush(cola, (0, origen))
+        while cola:     
+            # Extraer el nodo con menor distancia
+            d, u = heapq.heappop(cola)
+            # Marcarlo como visitado
             visitado.add(u)     
-            print(self.get_vecinos(u))
-            if (self.get_vecinos(u)):
-                for v in self.get_vecinos(u):    
-                    print("Segunda parte")   
+            # Comprobar si la distancia es la misma que la almacenada
+            if d == distancia[u]:
+                # Iterar sobre sus vecinos
+                for v in self.diccionario[u]:       
                     if v not in visitado:         
-                        d = distancia[u] + self.get_peso(u, v)      
+                        d = distancia[u] + self.diccionario[u][v]      
                         if d < distancia.get(v, float("inf")):        
                             distancia[v] = d                
                             previo[v] = u
+                            # Insertar el vecino con la nueva distancia
+                            heapq.heappush(cola, (d, v))
         return distancia, previo
-    
+    def min_distancia(self, distancia, visitado):
+        minimo = float("inf")
+        nodo_minimo = None
+        for nodo in distancia:
+            if nodo not in visitado and distancia[nodo] < minimo:
+                minimo = distancia[nodo]
+                nodo_minimo = nodo
+        # Si no hay ningún nodo con distancia menor que infinito, devolver uno cualquiera
+        print (nodo_minimo)
+        if nodo_minimo == None:
+            for nodo in distancia:
+                if nodo not in visitado:
+                    print("Entre")
+                    return nodo
+        return nodo_minimo
     # Un método auxiliar para encontrar el nodo con la menor distancia que no ha sido visitado
+    """
     def min_distancia(self, distancia, visitado): 
         minimo = float("inf")
         nodo_minimo = None 
@@ -52,7 +78,7 @@ class Grafo:
                 minimo = distancia[nodo]
                 nodo_minimo = nodo
         return nodo_minimo
-    
+    """
     # Un método para encontrar el camino más corto entre dos nodos usando Dijkstra
     def shortest_path(self, origen, destino):
         # Ejecutar Dijkstra desde el origen
