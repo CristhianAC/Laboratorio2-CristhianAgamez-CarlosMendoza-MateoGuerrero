@@ -5,7 +5,9 @@ grafo = {
     "d": {"b": 4, "c": 2, "e": 2, "f": 1},
     "e": {"c": 3, "d": 2, "f": 3, "g": 2},
     "f": {"d": 1, "e": 3, "g": 4},
-    "g": {"e": 2, "f": 4}
+    "g": {"e": 2, "f": 4},
+    # adding an isolated node h
+    "h": {}
 }
 
 def min_distancia(distancia, visitado): 
@@ -26,12 +28,17 @@ def dijkstra(grafo, origen):
     while len(visitado) < len(grafo):     
         u = min_distancia(distancia, visitado)    
         visitado.add(u)     
-        for v in grafo[u]:       
-            if v not in visitado:         
-                d = distancia[u] + grafo[u][v]      
-                if d < distancia.get(v, float("inf")):        
-                    distancia[v] = d                
-                    previo[v] = u
+        # check if u has any outgoing edges
+        if grafo[u]:
+            for v in grafo[u]:       
+                if v not in visitado:         
+                    d = distancia[u] + grafo[u][v]      
+                    if d < distancia.get(v, float("inf")):        
+                        distancia[v] = d                
+                        previo[v] = u
+        else:
+            # u is isolated, skip it
+            continue
     return distancia, previo
 
 def shortest_path(grafo, origen, destino):
