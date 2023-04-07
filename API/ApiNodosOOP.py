@@ -100,7 +100,28 @@ class AirportMap:
         print(f"No se encontraron vuelos desde {self.origen} a {destino}.")
     
     # Dentro de la clase donde se encuentra la función mostrar_destino()
-    
+    def graficar_ciudades(self, lista):
+        for i, ciudad in enumerate(lista[:-1]):
+            salida = lista[i]
+            llegada = lista[i + 1]
+            coord_salida = [self.airports_dict[salida]["lat"], self.airports_dict[salida]["lon"]]
+            coord_llegada = [self.airports_dict[llegada]["lat"], self.airports_dict[llegada]["lon"]]
+            distancia = round(distance.distance(coord_salida, coord_llegada).km, 2)
+            if i == 0:
+                color_salida = "green"
+            else:
+                color_salida = "darkblue"
+
+            html = f"Capital: {salida}<br> Ruta: {salida}→{llegada} (llegada)<br>Distancia: {distancia} km"
+            iframe = folium.IFrame(html, width=200, height=70)
+            popup = folium.Popup(iframe, max_width=200)
+            marker = folium.Marker(location=coord_salida, popup=popup, icon=folium.Icon(color=color_salida)).add_to(self.mapa)
+            folium.Marker(location=coord_llegada, popup=llegada + " (llegada)", icon=folium.Icon(color='darkpurple')).add_to(self.mapa)
+            etiqueta = f"{salida} → {llegada}({distancia})"
+            folium.PolyLine(locations=[coord_salida, coord_llegada], color='blue', tooltip=etiqueta).add_to(self.mapa)
+        return self.mapa
+
+
     def mostrar_mapa(self):
         return self.mapa
 AirportMap()
