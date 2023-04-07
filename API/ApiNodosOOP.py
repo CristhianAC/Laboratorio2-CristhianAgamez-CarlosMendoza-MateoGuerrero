@@ -65,7 +65,7 @@ class AirportMap:
         else:
             print("Entré")
             self.error = "La ciudad ingresada no está en la lista de aeropuertos."
-        grupo = folium.FeatureGroup(name="Destinos")    
+        grupo = folium.FeatureGroup(name="Destinos")
         for icao, airport in self.airports_dict.items():
             folium.Marker([airport['lat'], airport['lon']], popup= airport["city"], icon=folium.Icon(color='lightgray')).add_to(self.mapa)
         
@@ -84,7 +84,7 @@ class AirportMap:
                         etiqueta = f"{self.etiqueta_origen}-{etiqueta_llegada} ({dist_km} km)"
                         grupo.add_child(folium.PolyLine(locations=[salida, llegada], color='blue', tooltip=etiqueta))
                         self.mapa.add_child(grupo)
-                        self.mapa.add_child(folium.LayerControl())
+                        
     
     def mostrar_destino(self, destino):
         icoa_salida = self.icoa_origen

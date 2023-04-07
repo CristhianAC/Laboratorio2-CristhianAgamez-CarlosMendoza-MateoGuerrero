@@ -5,9 +5,10 @@
 <form method="post">
     <h3>Instrucciones</h3>
     <ul style="padding-bottom: 30px; ">
-        <li>Si digitas solo la ciudad de origen te mostrará solo los posibles vuelos de este
-            (si es que los tiene).</li>
-        <li>Si digitas los dos, y este tiene un vuelo directo te mostrará el vuelo directo, de lo contrario te mostrará la escala mas optima.</li>
+        <li>En el caso que sólo se digite la ciudad de origen, se mostrará en pantalla los posibles destinos partiendo desde éste (si es que tiene vuelos hacia otras Capitales del Mundo).
+            </li>
+        <li>En el caso que digites origen y también destino, se mostrará en la pantalla el camino más corto para ir del uno al otro. Es decir, en caso de ser un vuelo directo, sólo mostrará la ruta desde la capital de origen a la capital destino; en caso contrario, buscará las escalas óptimas, para que el viaje sea más corto.
+        </li>
         <li>Digita las ciudades en ingles y con mayuscula al principio, de lo contrario no funcionará</li>
     </ul>
     {% csrf_token %}
