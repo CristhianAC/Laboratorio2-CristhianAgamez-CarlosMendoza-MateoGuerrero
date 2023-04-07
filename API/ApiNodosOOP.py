@@ -104,8 +104,8 @@ class AirportMap:
         for i, ciudad in enumerate(lista[:-1]):
             salida = lista[i]
             llegada = lista[i + 1]
-            coord_salida = [self.airports_dict[salida]["lat"], self.airports_dict[salida]["lon"]]
-            coord_llegada = [self.airports_dict[llegada]["lat"], self.airports_dict[llegada]["lon"]]
+            coord_salida = [self.icao_dict[salida]["lat"], self.icao_dict[salida]["lon"]]
+            coord_llegada = [self.icao_dict[llegada]["lat"], self.icao_dict[llegada]["lon"]]
             distancia = round(distance.distance(coord_salida, coord_llegada).km, 2)
             if i == 0:
                 color_salida = "green"
@@ -124,7 +124,7 @@ class AirportMap:
 
     def mostrar_mapa(self):
         return self.mapa
-AirportMap()
+
 
 
 

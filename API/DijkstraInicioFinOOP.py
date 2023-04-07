@@ -51,6 +51,9 @@ class Grafo:
     # Un método para encontrar el camino más corto entre dos nodos usando Dijkstra
     def shortest_path(self, origen, destino):
         # Ejecutar Dijkstra desde el origen
+        origenFin = self.diccionario.get(origen).get(destino)
+        if origenFin is not None:
+            return [origen, destino]
         distancia, previo = self.dijkstra(origen)
         # Verificar si el destino es alcanzable
         if destino not in distancia:
