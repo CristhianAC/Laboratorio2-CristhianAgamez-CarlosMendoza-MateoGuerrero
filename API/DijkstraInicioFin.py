@@ -35,21 +35,16 @@ def dijkstra(grafo, origen):
     return distancia, previo
 
 def shortest_path(grafo, origen, destino):
-    # Run dijkstra from the origin node
     distancia, previo = dijkstra(grafo, origen)
-    # Check if the destination node is reachable
     if destino not in distancia:
         return None
-    # Trace back the path from the destination to the origin
     path = [destino]
     while previo[destino] != None:
         destino = previo[destino]
         path.append(destino)
-    # Reverse the path to get the correct order
     path.reverse()
     return path
 
-# Example: find the shortest path from a to g
 path = shortest_path(grafo, "a", "g")
 if path:
     print("The shortest path from a to g is:", "->".join(path))
