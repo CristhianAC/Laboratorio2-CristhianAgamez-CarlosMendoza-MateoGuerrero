@@ -68,17 +68,7 @@ class Grafo:
                     print("Entre")
                     return nodo
         return nodo_minimo
-    # Un método auxiliar para encontrar el nodo con la menor distancia que no ha sido visitado
-    """
-    def min_distancia(self, distancia, visitado): 
-        minimo = float("inf")
-        nodo_minimo = None 
-        for nodo in distancia:    
-            if nodo not in visitado and distancia[nodo] < minimo:        
-                minimo = distancia[nodo]
-                nodo_minimo = nodo
-        return nodo_minimo
-    """
+    
     # Un método para encontrar el camino más corto entre dos nodos usando Dijkstra
     def shortest_path(self, origen, destino):
         # Ejecutar Dijkstra desde el origen
@@ -102,24 +92,3 @@ class Grafo:
         path.reverse()
         return path
 
-# Crear un objeto Grafo con el diccionario dado
-"""
-grafo = Grafo({
-    "a": {"b": 1, "c": 3},
-    "b": {"a": 1, "c": 1, "d": 4},
-    "c": {"a": 3, "b": 1, "d": 2, "e": 3},
-    "d": {"b": 4, "c": 2, "e": 2, "f": 1},
-    "e": {"c": 3, "d": 2, "f": 3, "g": 2},
-    "f": {"d": 1, "e": 3, "g": 4},
-    "g": {"e": 2, "f": 4}
-})
-"""
-
-# Ejemplo: encontrar el camino más corto desde a hasta g
-"""
-path = grafo.shortest_path("a", "g")
-if path:
-    print("El camino más corto desde a hasta g es:", "->".join(path))
-else:
-    print("No hay camino desde a hasta g")
-"""
