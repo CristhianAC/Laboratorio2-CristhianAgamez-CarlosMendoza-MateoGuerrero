@@ -10,6 +10,8 @@
         <li>En el caso que digites origen y también destino, se mostrará en la pantalla el camino más corto para ir del uno al otro. Es decir, en caso de ser un vuelo directo, sólo mostrará la ruta desde la capital de origen a la capital destino; en caso contrario, buscará las escalas óptimas, para que el viaje sea más corto.
         </li>
         <li>IMPORTANTE: Se deben digitar las Ciudades Capitales en el idioma inglés y con mayúscula inicial (esto quiere decir que no se aceptan acentos, ni ninguna manera de escribir en otro idioma).</li>
+        <li>En el caso que sólo se digite en el destino, el programa no funcionará.</li>
+        <li>En el caso que se deseé ver el BFS, únicamente se tiene que digitar en la casilla correspondiente a BFS.</li>
     </ul>
     {% csrf_token %}
     {{addCity.as_p}}
