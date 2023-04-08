@@ -191,6 +191,22 @@ class AirportMap:
                     if vecino not in visitados:
                         cola.append(vecino)
         return visitados
+    def dfs(self, inicio):
+        visited = set()
+        stack = [inicio]
+        path = []
+        
+        while stack:
+            node = stack.pop()
+            if node not in visited:
+                visited.add(node)
+                path.append(node)
+                stack.extend(reversed(list(self.Grafo[node].keys())))
+        
+        return path
+    def dfsGraphic(self, inicio):
+        lista = self.dfs(self.airports_dict[inicio]['icao'])
+        self.graficar_ciudades(lista)
     def bfsGraphic(self, inicio):
         lista = self.bfs(self.airports_dict[inicio]['icao'])
         self.graficar_ciudades(lista)

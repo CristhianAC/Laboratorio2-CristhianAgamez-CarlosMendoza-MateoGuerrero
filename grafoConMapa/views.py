@@ -11,7 +11,8 @@ def index(request):
     
     
     return render(request, 'index.html', {})
-
+def uml(request):
+    return render(request, 'uml.html', {})
 
 def mapa(request):
     
@@ -47,6 +48,12 @@ def mapa(request):
                 try:
                     flight.bfsGraphic(request.POST['bfs'])
                     flight.error = ""
+                except:
+                    flight.error = "Una de las ciudades digitadas no existe."
+            elif request.POST['dfs']:
+                try:
+                    flight.dfsGraphic(request.POST["dfs"])
+                    flight.error=""
                 except:
                     flight.error = "Una de las ciudades digitadas no existe."
             else:    
