@@ -33,11 +33,13 @@ def mapa(request):
         
         return render(request, 'sistema.html', context)
     else:
-        flight = AirportMap()
+        
+        
         if request.POST["destiny"] and request.POST["City"]:
             try:
                 flight.graficar_ciudades(flight.crearPath(flight.airports_dict[request.POST["City"]]["icao"] ,flight.airports_dict[request.POST["destiny"]]["icao"] )) 
                 flight.error = ""
+                
             except:
                 flight.error = "Una de las ciudades digitadas no existe o no hay vuelos que puedan conectar ciudades por el momento"
         else:
@@ -53,12 +55,12 @@ def mapa(request):
                 
         m = flight.mostrar_mapa()
         m = m._repr_html_()
-
         context = {
-            'm': m,
-            'addCity': addCity(),
-            'error': flight.error,
-            'flight': flight,
+                    'm': m,
+                    'addCity': addCity(),
+                    'error': flight.error,
+                    'flight': flight,
 
-        }
+                }
+        
         return render(request, 'sistema.html', context)
