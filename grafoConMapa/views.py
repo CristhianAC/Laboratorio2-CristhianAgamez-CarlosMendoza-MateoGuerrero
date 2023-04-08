@@ -33,7 +33,7 @@ def mapa(request):
         
         return render(request, 'sistema.html', context)
     else:
-        
+        flight = AirportMap()
         
         if request.POST["destiny"] and request.POST["City"]:
             try:
