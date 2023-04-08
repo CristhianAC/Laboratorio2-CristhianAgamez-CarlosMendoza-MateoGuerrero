@@ -19,15 +19,29 @@ class AirportMap:
         self.etiqueta_origen = None
         self.Grafo = {}
         self.horaActual = datetime.datetime.now()
+        
+        ahora = datetime.datetime.now()
+        
+        
+        
         self.error = ""
         for icao, airport in self.airports_dict.items():
             folium.Marker([airport['lat'], airport['lon']], popup= airport["city"], icon=folium.Icon(color='lightgray')).add_to(self.mapa)
+        fileHora = open("API/ultimavez.txt", "r")
         
-        if self.horaActual.hour == 0 and self.horaActual.minute == 0:
+        
+        
+        if  int(fileHora.read()) != int(ahora.day): 
+            
+            t = open("API/ultimavez.txt", "w")
+            t.write(str(ahora.day))
+            t.close
             with open("API/grafo.json", "w") as h:
                 self.crearGrafo()
                 json.dump(self.Grafo, h)
-                
+        
+        
+        fileHora.close()
         
         self.obGrafo = Grafo()
     

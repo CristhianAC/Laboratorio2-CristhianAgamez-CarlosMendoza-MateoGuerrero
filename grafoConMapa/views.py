@@ -5,7 +5,7 @@ from .forms import addCity
 from API.ApiNodosOOP import AirportMap
 # Create
 # your views here.
-
+flight = AirportMap()
 
 def index(request):
     
@@ -15,7 +15,7 @@ def index(request):
 
 def mapa(request):
     
-    flight = AirportMap()
+    
     m = flight.mostrar_mapa()
 
     if request.method == "GET":
