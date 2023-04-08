@@ -6,6 +6,7 @@ from opensky_api import OpenSkyApi
 from .DijkstraInicioFinOOP import Grafo
 import datetime
 from collections import deque
+
 class AirportMap:
     def __init__(self):
         self.origen = None
