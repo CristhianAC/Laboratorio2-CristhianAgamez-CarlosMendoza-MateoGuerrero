@@ -33,7 +33,7 @@ class AirportMap:
         
         
         if  int(fileHora.read()) != int(ahora.day): 
-            
+            print("Porfavor espere un momento, estamos actualizando el sistema de viajes...")
             t = open("appDeVuelo/ultimavez.txt", "w")
             t.write(str(ahora.day))
             t.close
