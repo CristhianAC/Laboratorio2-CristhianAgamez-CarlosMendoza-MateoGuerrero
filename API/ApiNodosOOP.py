@@ -137,9 +137,17 @@ class AirportMap:
     
     # Dentro de la clase donde se encuentra la función mostrar_destino()
     def graficar_ciudades(self, lista):
+        if not hasattr (self, 'objetos'):
+            self.objetos = []
+        # Si hay objetos anteriores, borrarlos
+        for obj in self.objetos:
+            obj.remove ()
+        # Vaciar la lista de objetos
+        self.objetos = []
+
         for icao, airport in self.airports_dict.items():
             folium.Marker([airport['lat'], airport['lon']], popup= airport["city"], icon=folium.Icon(color='lightgray')).add_to(self.mapa)
-        grupo3 = folium.FeatureGroup(name="Destinos")
+
         for i, ciudad in enumerate(lista[:-1]):
             salida = lista[i]
             llegada = lista[i + 1]
@@ -155,11 +163,22 @@ class AirportMap:
             html = f"Capital: {nombreSalida}<br> Ruta: {nombreSalida}→{nombreLlegada}<br>Distancia: {distancia} km"
             iframe = folium.IFrame(html, width=200, height=70)
             popup = folium.Popup(iframe, max_width=200)
-            marker = grupo3.add_child(folium.Marker(location=coord_salida, popup=popup, icon=folium.Icon(color=color_salida)))
-            grupo3.add_child(folium.Marker(location=coord_llegada, popup=nombreLlegada, icon=folium.Icon(color='darkpurple')))
+            
+            # Crear los marcadores y la línea
+            marcador_salida = folium.Marker(location=coord_salida, popup=popup, icon=folium.Icon(color=color_salida))
+            marcador_llegada = folium.Marker(location=coord_llegada, popup=nombreLlegada, icon=folium.Icon(color='darkpurple'))
             etiqueta = f"{salida} → {llegada}({distancia})"
-            grupo3.add_child(folium.PolyLine(locations=[coord_salida, coord_llegada], color='blue', tooltip=etiqueta))
-        self.mapa.add_child(grupo3)
+            linea = folium.PolyLine(locations=[coord_salida, coord_llegada], color='blue', tooltip=etiqueta)
+
+            # Añadir los objetos al mapa y a la lista de objetos
+            marcador_salida.add_to(self.mapa)
+            marcador_llegada.add_to(self.mapa)
+            linea.add_to(self.mapa)
+            self.objetos.append(marcador_salida)
+            self.objetos.append(marcador_llegada)
+            self.objetos.append(linea)
+
+        return self.mapa
     def bfs(self, inicio):
         visitados = []
         cola = deque([inicio])
