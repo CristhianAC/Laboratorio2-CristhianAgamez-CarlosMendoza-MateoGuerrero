@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from .forms import addCity
-from API.ApiNodosOOP import AirportMap
+from appDeVuelo.ApiNodosOOP import AirportMap
 # Create
 # your views here.
 

@@ -11,9 +11,9 @@ class AirportMap:
         self.origen = None
         self.api = OpenSkyApi()
         self.now = int(time.time())
-        with open("API/city_dataSIU.json", "r") as f:
+        with open("appDeVuelo/city_dataSIU.json", "r") as f:
             self.airports_dict = json.load(f)
-        with open("API/icao_dataSIU.json", "r") as l:
+        with open("appDeVuelo/icao_dataSIU.json", "r") as l:
             self.icao_dict = json.load(l)
         self.mapa = folium.Map(location=[4.6097100, -74.0817500], min_zoom=3, zoom_start=3, tiles="Stamen Terrain")
         self.icoa_origen = None
@@ -28,16 +28,16 @@ class AirportMap:
         self.error = ""
         for icao, airport in self.airports_dict.items():
             folium.Marker([airport['lat'], airport['lon']], popup= airport["city"], icon=folium.Icon(color='lightgray')).add_to(self.mapa)
-        fileHora = open("API/ultimavez.txt", "r")
+        fileHora = open("appDeVuelo/ultimavez.txt", "r")
         
         
         
         if  int(fileHora.read()) != int(ahora.day): 
             
-            t = open("API/ultimavez.txt", "w")
+            t = open("appDeVuelo/ultimavez.txt", "w")
             t.write(str(ahora.day))
             t.close
-            with open("API/grafo.json", "w") as h:
+            with open("appDeVuelo/grafo.json", "w") as h:
                 self.crearGrafo()
                 json.dump(self.Grafo, h)
         
