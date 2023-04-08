@@ -39,7 +39,7 @@ def mapa(request):
                 flight.graficar_ciudades(flight.crearPath(flight.airports_dict[request.POST["City"]]["icao"] ,flight.airports_dict[request.POST["destiny"]]["icao"] )) 
                 flight.error = ""
             except:
-                flight.error = "Una de las ciudades digitadas no existe."
+                flight.error = "Una de las ciudades digitadas no existe o no hay vuelos que puedan conectar ciudades por el momento"
         else:
             if request.POST['bfs']:
                 try:
