@@ -5,6 +5,7 @@ from geopy import distance
 from opensky_api import OpenSkyApi
 from .DijkstraInicioFinOOP import Grafo
 import datetime
+from collections import deque
 class AirportMap:
     def __init__(self):
         self.origen = None
@@ -44,6 +45,7 @@ class AirportMap:
         fileHora.close()
         
         self.obGrafo = Grafo()
+        self.Grafo = self.obGrafo.diccionario
     
     def crearPath(self, origen, fin):
         path = self.obGrafo.shortest_path(origen, fin)
@@ -158,7 +160,21 @@ class AirportMap:
             etiqueta = f"{salida} → {llegada}({distancia})"
             grupo3.add_child(folium.PolyLine(locations=[coord_salida, coord_llegada], color='blue', tooltip=etiqueta))
         self.mapa.add_child(grupo3)
-
+    def bfs(self, inicio):
+        visitados = []
+        cola = deque([inicio])
+        while cola:
+            nodo = cola.popleft()
+            if nodo not in visitados:
+                visitados.append(nodo)
+                print(nodo)
+                for vecino in self.Grafo[nodo].keys():
+                    if vecino not in visitados:
+                        cola.append(vecino)
+        return visitados
+    def bfsGraphic(self, inicio):
+        lista = self.bfs(self.airports_dict[inicio]['icao'])
+        self.graficar_ciudades(lista)
 
     def mostrar_mapa(self):
         return self.mapa

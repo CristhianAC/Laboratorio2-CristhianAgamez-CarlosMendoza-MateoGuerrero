@@ -25,6 +25,7 @@ def mapa(request):
             'm': m,
             'addCity': addCity(),
             'error' : flight.error,
+            'flight': flight,
         }
         return render(request, 'sistema.html', context)
     else:
@@ -34,9 +35,11 @@ def mapa(request):
             except:
                 flight.error = "Una de las ciudades digitadas no existe"
         else:
-            
-            flight.mostrar_todos_destinos(request.POST["City"])
-            print(flight.error)
+            if request.POST['bfs']:
+                flight.bfsGraphic(request.POST['bfs'])
+            else:    
+                flight.mostrar_todos_destinos(request.POST["City"])
+                print(flight.error)
 
         m = m._repr_html_()
 
@@ -44,6 +47,7 @@ def mapa(request):
             'm': m,
             'addCity': addCity(),
             'error': flight.error,
+            'flight': flight,
 
         }
         return render(request, 'sistema.html', context)
