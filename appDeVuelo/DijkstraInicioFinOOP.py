@@ -4,7 +4,7 @@ import heapq # Para usar la cola de prioridad
 class Grafo:
     # El constructor recibe un diccionario que representa las aristas y sus pesos
     def __init__(self):
-        with open("API/grafo.json", "r") as f:
+        with open("appDeVuelo/grafo.json", "r") as f:
             self.diccionario = json.load(f)
         
         
