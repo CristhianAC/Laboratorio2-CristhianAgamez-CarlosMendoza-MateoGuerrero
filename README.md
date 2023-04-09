@@ -9,6 +9,7 @@
     ```
     pip install django
     pip install opensky_api
+    pip install requests
     pip instal folium
     
     ```
