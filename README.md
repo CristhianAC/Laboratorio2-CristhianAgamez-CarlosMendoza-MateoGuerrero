@@ -8,7 +8,7 @@
 - Acceder a la consola para instalar las librerias necesarias y escribir uno por uno los siguientes codigos:
     ```
     pip install django
-    pip install opensky_api
+    pip install -e "git+https://github.com/openskynetwork/opensky-api.git#egg=opensky-api&subdirectory=python"
     pip install requests
     pip instal folium
     
